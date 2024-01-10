@@ -1,4 +1,11 @@
-vim.g.mapleader = " "
+-- Set leader key before anything
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Disable netrw so that we can use Nvimtree without hassle
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
