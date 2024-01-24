@@ -72,10 +72,7 @@ require("copilot").setup(
         suggestion = {
             auto_trigger = true,
             keymap = {
-                accept = "<M-l>",
-                prev = "<M-[>",
-                next = "<M-]>",
-                dismiss = "<C-]>"
+                accept = false,
             }
         }
     }
@@ -119,6 +116,7 @@ local luasnip = require "luasnip"
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.config.setup {}
 
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -140,7 +138,9 @@ cmp.setup {
         },
         ["<Tab>"] = cmp.mapping(
             function(fallback)
-                if cmp.visible() then
+                if require("copilot.suggestion").is_visible() then
+                    require("copilot.suggestion").accept()
+                elseif cmp.visible() then
                     cmp.select_next_item()
                 elseif luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
@@ -169,4 +169,5 @@ cmp.setup {
         {name = "path"}
     }
 }
+
 

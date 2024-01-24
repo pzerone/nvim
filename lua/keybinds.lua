@@ -7,10 +7,11 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader><space>', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
--- LSP keymaps
+-- Telescope LSP keymaps
 vim.keymap.set('n', 'gd', builtin.lsp_definitions, {})
 vim.keymap.set('n', 'gr', builtin.lsp_references, {})
 vim.keymap.set('n', 'gI', builtin.lsp_implementations, {})
+vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
@@ -23,8 +24,8 @@ vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist"
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
 -- Nvimtree
-vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", {silent = true})
-vim.keymap.set("n", "<leader>N", ":NvimTreeFocus<CR>", {silent = true})
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", {silent = true})
+vim.keymap.set("n", "<leader>E", ":NvimTreeFocus<CR>", {silent = true})
 
 -- Yank and paste from system clipboard
 vim.keymap.set("v", "<leader>y", '"+y', {})
