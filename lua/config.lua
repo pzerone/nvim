@@ -8,7 +8,16 @@ require("kanagawa").setup(
                     ui = {bg_gutter = "none"}
                 }
             }
-        }
+        },
+        overrides = function(colors)
+            local theme = colors.theme
+            return {
+                Pmenu = {fg = theme.ui.shade0, bg = theme.ui.bg_p1}, -- add `blend = vim.o.pumblend` to enable transparency
+                PmenuSel = {fg = "NONE", bg = theme.ui.bg_p2},
+                PmenuSbar = {bg = theme.ui.bg_m1},
+                PmenuThumb = {bg = theme.ui.bg_p2}
+            }
+        end
     }
 )
 vim.cmd("colorscheme kanagawa-dragon")
@@ -17,9 +26,9 @@ vim.cmd("colorscheme kanagawa-dragon")
 require("nvim-tree").setup(
     {
         sort = {sorter = "case_sensitive"},
-        view = {width = 25},
+        view = {width = 30},
         renderer = {group_empty = true},
-        filters = {dotfiles = true}
+        filters = {dotfiles = false}
     }
 )
 
@@ -43,7 +52,7 @@ require("Comment").setup({})
 vim.defer_fn(
     function()
         require "nvim-treesitter.configs".setup {
-            ensure_installed = {"c", "lua", "python", "go"},
+            ensure_installed = {"c", "lua", "python", "go", "bash"},
             sync_install = false,
             auto_install = false,
             ignore_install = {},
@@ -56,28 +65,6 @@ vim.defer_fn(
 -- Git workflow
 require("gitsigns").setup({})
 
---Copilot
-require("copilot").setup(
-    {
-        panel = {
-            auto_refresh = false,
-            keymap = {
-                accept = "<CR>",
-                jump_prev = "[[",
-                jump_next = "]]",
-                refresh = "gr",
-                open = "<M-CR>"
-            }
-        },
-        suggestion = {
-            auto_trigger = true,
-            keymap = {
-                accept = false,
-            }
-        }
-    }
-)
-
 -- LSP
 require("mason").setup({})
 require("mason-lspconfig").setup({})
@@ -86,10 +73,19 @@ require("mason-lspconfig").setup({})
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+vim.diagnostic.config(
+    {
+        virtual_text = {
+            prefix = ""
+        },
+        signs = true
+        -- underline = true,
+    }
+)
+
 local servers = {
     gopls = {},
-    pyright = {},
-    rust_analyzer = {}
+    pyright = {}
 }
 
 -- Ensure the servers above are installed
@@ -116,7 +112,6 @@ local luasnip = require "luasnip"
 require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.config.setup {}
 
-
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -138,9 +133,7 @@ cmp.setup {
         },
         ["<Tab>"] = cmp.mapping(
             function(fallback)
-                if require("copilot.suggestion").is_visible() then
-                    require("copilot.suggestion").accept()
-                elseif cmp.visible() then
+                if cmp.visible() then
                     cmp.select_next_item()
                 elseif luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
@@ -169,5 +162,3 @@ cmp.setup {
         {name = "path"}
     }
 }
-
-
