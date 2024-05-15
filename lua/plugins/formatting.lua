@@ -6,7 +6,7 @@ return {
                 require("conform").format({async = true, lsp_fallback = true})
             end, mode = "", desc = "Format buffer"}},
     opts = {
-        formatters_by_ft = { python = {"black"}},
+        formatters_by_ft = { python = {"ruff_format"}},
         format_on_save = false,
         formatters = {}
     },

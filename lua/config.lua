@@ -2,6 +2,7 @@ require("kanagawa").setup(
     {
         compile = true,
         colors = {theme = {all = {ui = {bg_gutter = "none"}}}},
+        transparent = true,
         overrides = function(a)
             local b = a.theme
             return {
@@ -25,7 +26,15 @@ require("nvim-tree").setup(
 require("lualine").setup(
     {options = {component_separators = {left = "", right = ""}, section_separators = {left = "", right = ""}}}
 )
-require("ibl").setup({})
+
+require("ibl").setup {
+    indent = { char = "│", tab_char = "│", },
+    whitespace = {
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = false },
+}
+
 require("Comment").setup({})
 vim.defer_fn(
     function()
@@ -47,7 +56,7 @@ require("mason-lspconfig").setup({})
 local c = vim.lsp.protocol.make_client_capabilities()
 c = require("cmp_nvim_lsp").default_capabilities(c)
 vim.diagnostic.config({virtual_text = {prefix = ""}, signs = true})
-local d = {gopls = {}, pyright = {}}
+local d = {gopls = {}}
 local e = require("mason-lspconfig")
 e.setup({ensure_installed = vim.tbl_keys(d)})
 e.setup_handlers(
