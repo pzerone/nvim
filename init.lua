@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Sane configs
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
@@ -25,6 +25,7 @@ vim.opt.smarttab = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.autoindent = true
+vim.opt.breakindent = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.hidden = true
@@ -33,15 +34,20 @@ vim.opt.wildmenu = true
 vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.incsearch = true
+vim.opt.cursorline = true
 vim.opt.showmatch = true
-vim.opt.hlsearch = false
+vim.opt.showmode = false
 vim.opt.mouse = "a"
 vim.opt.shortmess = vim.opt.shortmess + "c"
 vim.opt.guicursor = "i:block"
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
+vim.opt.scrolloff = 15
+
+vim.opt.incsearch = true
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.completeopt = "menu", "menuone", "noselect"
 vim.wo.signcolumn = "yes"
 
@@ -70,6 +76,14 @@ vim.keymap.set("v", "<leader>p", '"+p', {})
 vim.keymap.set("n", "<leader>p", '"+p', {})
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
+
+-- Force use hjkl
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 
 -- Plugin configurations
 require("lazy").setup(
