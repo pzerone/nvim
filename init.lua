@@ -25,6 +25,7 @@ vim.opt.smarttab = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.autoindent = true
+vim.opt.smartindent = true
 vim.opt.breakindent = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -76,6 +77,10 @@ vim.keymap.set("v", "<leader>p", '"+p', {})
 vim.keymap.set("n", "<leader>p", '"+p', {})
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
+
+-- Move visual selection up n down... Hail Primeagen
+vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", {})
+vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", {})
 
 -- Force use hjkl
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -170,7 +175,6 @@ require("lazy").setup(
                         ensure_installed = {"c", "lua", "go", "python"},
                         sync_install = false,
                         highlight = {enable = true},
-                        indent = {enable = true}
                     }
                 )
             end
@@ -187,7 +191,8 @@ require("lazy").setup(
                 {"<leader><space>", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer"},
                 {"<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files in current directory"},
                 {"<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep"},
-                {"<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help"}
+                {"<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help"},
+                {"<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Show git commits"}
             }
         },
         {
@@ -293,6 +298,7 @@ require("lazy").setup(
                 -- Add any servers here for it to be preinstalled
                 ensure_installed = {
                     "gopls",
+                    "ruff",
                     "basedpyright"
                 },
                 handlers = {
@@ -312,7 +318,7 @@ require("lazy").setup(
                                     vim.keymap.set("n", "gs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
                                     vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
                                     vim.keymap.set("n", "go", "<cmd>Telescope lsp_type_definitions<cr>", opts)
-                                    -- vim.keymap.set("n", "gl", "<cmd>Telescope diagnostics<cr>") -- Trouble does the same
+                                    vim.keymap.set("n", "gl", "<cmd>Telescope diagnostics<cr>") -- Trouble does the same
 
                                     vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
                                     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
