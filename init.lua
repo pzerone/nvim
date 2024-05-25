@@ -18,38 +18,37 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
 vim.opt.breakindent = true
+vim.opt.completeopt = "menu", "menuone", "noselect"
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.guicursor = "i:block"
+vim.opt.hidden = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.hidden = true
+vim.opt.smarttab = true
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.smartindent = true
 vim.opt.autoread = true
 vim.opt.wildmenu = true
 vim.opt.termguicolors = true
-vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.cursorline = true
 vim.opt.showmatch = true
 vim.opt.showmode = false
-vim.opt.mouse = "a"
 vim.opt.shortmess = vim.opt.shortmess + "c"
-vim.opt.guicursor = "i:block"
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.scrolloff = 15
 
-vim.opt.incsearch = true
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.completeopt = "menu", "menuone", "noselect"
 vim.wo.signcolumn = "yes"
 
 -- Disable netrw for nvim tree
@@ -61,9 +60,9 @@ vim.diagnostic.config(
     {
         signs = {
             text = {
-                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.ERROR] = "",
                 [vim.diagnostic.severity.WARN] = "",
-                [vim.diagnostic.severity.HINT] = "",
+                [vim.diagnostic.severity.HINT] = "",
                 [vim.diagnostic.severity.INFO] = ""
             }
         }
@@ -87,6 +86,12 @@ vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+vim.keymap.set('i', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('i', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('i', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('i', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 
