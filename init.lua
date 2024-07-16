@@ -32,7 +32,7 @@ vim.opt.relativenumber = true
 vim.opt.smarttab = true
 vim.opt.smoothscroll = true
 vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.smartindent = true
@@ -44,6 +44,7 @@ vim.opt.showmatch = true
 vim.opt.showmode = false
 vim.opt.shortmess = vim.opt.shortmess + "c"
 vim.opt.undofile = true
+vim.opt.swapfile = false
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 vim.opt.scrolloff = 15
@@ -88,6 +89,9 @@ vim.keymap.set("i", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set("i", "<right>", '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set("i", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set("i", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -220,8 +224,6 @@ require("lazy").setup({
 					end,
 				},
 				mapping = {
-					["<C-k>"] = cmp.mapping.select_prev_item(select_opts),
-					["<C-j>"] = cmp.mapping.select_next_item(select_opts),
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-e>"] = cmp.mapping.abort(),
