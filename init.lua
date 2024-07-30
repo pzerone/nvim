@@ -199,7 +199,7 @@ require("lazy").setup({
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help" },
 			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Show git commits" },
 		},
-                lazy = false,
+		lazy = false,
 	},
 	{
 		-- Autocompletion and helpers
@@ -317,7 +317,8 @@ require("lazy").setup({
 						end,
 					})
 					local capabilities = vim.lsp.protocol.make_client_capabilities()
-					capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+					capabilities =
+						vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 					})
