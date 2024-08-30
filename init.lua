@@ -137,9 +137,6 @@ require("lazy").setup({
 		opts = {
 			sort = { sorter = "case_sensitive" },
 			view = { width = 30 },
-			git = {
-				ignore = false,
-			},
 			renderer = { group_empty = true },
 			filters = { dotfiles = false },
 		},
@@ -219,7 +216,7 @@ require("lazy").setup({
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local select_opts = { behavior = cmp.SelectBehavior.Insert }
+			local select_opts = { behavior = cmp.SelectBehavior.Select }
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -339,7 +336,20 @@ require("lazy").setup({
 					require("lspconfig").basedpyright.setup({
 						settings = {
 							basedpyright = {
-								analysis = { typeCheckingMode = "standard" },
+								analysis = { typeCheckingMode = "off" },
+							},
+						},
+					})
+				end,
+				["gopls"] = function()
+					require("lspconfig").gopls.setup({
+						settings = {
+							gopls = {
+								semanticTokens = false,
+								analyses = {
+									unusedparams = true,
+								},
+								staticcheck = true,
 							},
 						},
 					})
