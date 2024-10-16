@@ -317,12 +317,12 @@ require("lazy").setup({
 							vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 
 							-- Inlay hints for supported handlers
-							local id = vim.tbl_get(event, "data", "client_id")
-							local client = id and vim.lsp.get_client_by_id(id)
-							if client == nil or not client.supports_method("textDocument/inlayHint") then
-								return
-							end
-							vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+							-- local id = vim.tbl_get(event, "data", "client_id")
+							-- local client = id and vim.lsp.get_client_by_id(id)
+							-- if client == nil or not client.supports_method("textDocument/inlayHint") then
+							-- 	return
+							-- end
+							-- vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 						end,
 					})
 					local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -384,6 +384,7 @@ require("lazy").setup({
 	},
 }) -- Lazy ends
 
+-- Autocmds
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
     pattern = "*",
     callback = function()
