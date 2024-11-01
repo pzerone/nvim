@@ -65,7 +65,7 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = "",
 		},
 	},
-        virtual_text = false,
+	virtual_text = false,
 })
 
 -- Sane keybinds
@@ -214,16 +214,9 @@ require("lazy").setup({
 		},
 		event = "InsertEnter",
 		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
 			local select_opts = { behavior = cmp.SelectBehavior.Select }
 			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
 				window = {
 					completion = {
 						scrollbar = false,
@@ -237,20 +230,6 @@ require("lazy").setup({
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					-- ["<C-f>"] = cmp.mapping(function(fallback)
-					-- 	if luasnip.jumpable(1) then
-					-- 		luasnip.jump(1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
-					-- ["<C-b>"] = cmp.mapping(function(fallback)
-					-- 	if luasnip.jumpable(-1) then
-					-- 		luasnip.jump(-1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						local col = vim.fn.col(".") - 1
 
@@ -274,8 +253,6 @@ require("lazy").setup({
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "luasnip" },
-				}, {
 					{ name = "buffer" },
 				}),
 			})
@@ -386,23 +363,23 @@ require("lazy").setup({
 
 -- Autocmds
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
-    pattern = "*",
-    callback = function()
-        for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-            if vim.api.nvim_win_get_config(winid).zindex then
-                return
-            end
-        end
-        vim.diagnostic.open_float({
-            scope = "cursor",
-            focusable = false,
-            close_events = {
-                "CursorMoved",
-                "CursorMovedI",
-                "BufHidden",
-                "InsertCharPre",
-                "WinLeave",
-            },
-        })
-    end
+	pattern = "*",
+	callback = function()
+		for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.api.nvim_win_get_config(winid).zindex then
+				return
+			end
+		end
+		vim.diagnostic.open_float({
+			scope = "cursor",
+			focusable = false,
+			close_events = {
+				"CursorMoved",
+				"CursorMovedI",
+				"BufHidden",
+				"InsertCharPre",
+				"WinLeave",
+			},
+		})
+	end,
 })
