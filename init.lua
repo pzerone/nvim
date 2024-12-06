@@ -81,15 +81,15 @@ vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", {})
 vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", {})
 
 -- Force use hjkl
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move"<CR>')
 
-vim.keymap.set("i", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("i", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("i", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("i", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("i", "<left>", '<cmd>echo "Use h to move"<CR>')
+vim.keymap.set("i", "<right>", '<cmd>echo "Use l to move"<CR>')
+vim.keymap.set("i", "<up>", '<cmd>echo "Use k to move"<CR>')
+vim.keymap.set("i", "<down>", '<cmd>echo "Use j to move"<CR>')
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
@@ -157,7 +157,6 @@ require("lazy").setup({
 		},
 	},
 	-- Stuff that does not require any configs
-	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} }, -- Automatic bracket pairing
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- Git signs
 	{ "numToStr/Comment.nvim", opts = {} }, -- To toggle linewise/blockwise comments
 	{
@@ -194,7 +193,11 @@ require("lazy").setup({
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		keys = {
-			{ "<leader><space>", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+			{
+				"<leader><space>",
+				"<cmd>Telescope buffers {sort_mru=true, ignore_current_buffer=true}<cr>",
+				desc = "Switch Buffer",
+			},
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files in current directory" },
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope help" },
@@ -314,7 +317,10 @@ require("lazy").setup({
 					require("lspconfig").basedpyright.setup({
 						settings = {
 							basedpyright = {
-								analysis = { typeCheckingMode = "off" },
+								analysis = {
+									reportUnreachable = false,
+									typeCheckingMode = "off",
+								},
 							},
 						},
 					})
