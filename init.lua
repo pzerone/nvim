@@ -41,6 +41,7 @@ vim.opt.wildmenu = true
 vim.opt.termguicolors = true
 vim.opt.smartcase = true
 -- vim.opt.showmatch = true
+-- vim.opt.showcmd = false
 vim.opt.showmode = false
 vim.opt.shortmess = vim.opt.shortmess + "c"
 vim.opt.undofile = true
@@ -129,6 +130,19 @@ require("lazy").setup({
 			options = {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
+			},
+			sections = {
+				lualine_b = {
+					{
+						"branch",
+						"diff",
+						"diagnostics",
+						icons_enabled = true,
+						icon = "",
+						padding = 1,
+					},
+				},
+				lualine_x = { "encoding", "filetype" },
 			},
 		},
 	},
