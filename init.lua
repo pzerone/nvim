@@ -174,6 +174,11 @@ require("lazy").setup({
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- Git signs
 	{ "numToStr/Comment.nvim", opts = {} }, -- To toggle linewise/blockwise comments
 	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+	},
+	{
 		-- Shows diagnostics info on a seperate window
 		"folke/trouble.nvim",
 		opts = {},
@@ -201,7 +206,7 @@ require("lazy").setup({
 	{
 		-- Floating menu based find file/lsp stuff
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.6",
+		tag = "0.1.8",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -227,6 +232,7 @@ require("lazy").setup({
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "rafamadriz/friendly-snippets" },
 		},
 		event = "InsertEnter",
@@ -271,6 +277,7 @@ require("lazy").setup({
 					{ name = "buffer" },
 					{ name = "path" },
 					{ name = "buffer" },
+					{ name = "nvim_lsp_signature_help" },
 				}),
 			})
 		end,
